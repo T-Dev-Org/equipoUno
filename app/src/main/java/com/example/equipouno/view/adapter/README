@@ -1,0 +1,31 @@
+Purpose: This folder contains all Adapter classes. Adapters are responsible for populating data into RecyclerView or other components like ViewPager. They bind the data to the views in the UI.
+
+What to include:
+
+* Custom adapter classes for RecyclerView, ViewPager, etc.
+* Logic to bind data to view holders or specific views
+
+Examples:
+
+* HeroAdapter.kt
+* InventoryAdapter.kt
+* GalleryAdapter.kt
+
+== Example [InventoryAdapter.kt]
+    // imports
+    class InventoryAdapter(private val listInventory:MutableList<Inventory>,
+                           private val navController: NavController)
+                           :RecyclerView.Adapter<InventoryViewHolder>()
+                           {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryViewHolder {
+            val binding = ItemInventoryBinding.inflate(LayoutInflater.from(parent.context),parent, false)
+            return InventoryViewHolder(binding, navController)
+        }
+        override fun getItemCount(): Int {
+            return listInventory.size
+        }
+        override fun onBindViewHolder(holder: InventoryViewHolder, position: Int) {
+            val inventory = listInventory[position]
+            holder.setItemInventory(inventory)
+        }
+    }

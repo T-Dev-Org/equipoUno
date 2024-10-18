@@ -1,0 +1,40 @@
+Purpose:
+
+This folder holds the data models or entities in the app. These are Kotlin data classes or classes
+annotated with @Entity for Room or any ORM (Object Relational Mapping) framework.
+These models represent the structure of your database tables or other data forms.
+
+What to include:
+
+* Kotlin data classes
+* Room @Entity annotated classes
+* Other model objects like API response models
+
+Examples:
+
+* User.kt
+* Inventory.kt
+* Product.kt
+
+== Example [Inventory.kt] ==
+    // imports: Uses room (Entity, PK) for local database and java.io (Serializable)
+    @Entity
+    data class Inventory(
+        @PrimaryKey(autoGenerate = true)
+        val id: Int = 0,
+        val name: String,
+        val price: Int,
+        val quantity: Int): Serializable
+
+== Example [Product.kt] ==
+    // imports: Uses room (Entity, PK) for local database and java.io (Serializable)
+    data class Product(
+        @SerializedName("id")
+        val id:Int,
+
+        @SerializedName("title")
+        val title: String,
+
+        @SerializedName("image")
+        val image:String
+    )

@@ -1,0 +1,24 @@
+Purpose:
+
+This folder contains utility classes and functions that are shared across different parts of the app.
+These include helper functions, extensions, constants and other general-purpose code that doesn't
+belong to a specific layer like the view or model.
+
+What to include:
+
+* Helper classes
+* Extension functions
+* Utility functions
+
+Examples:
+
+* DateUtils.kt
+* StringExtensions.kt
+* Constants.kt
+
+== Example [Constants.kt]
+    object Constants {
+        const val NAME_BD: String ="app_data.db"
+        const val BASE_URL="https://fakestoreapi.com/"
+        const val END_POINT="products"
+    }

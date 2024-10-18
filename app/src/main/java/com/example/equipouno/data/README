@@ -1,0 +1,49 @@
+Purpose:
+
+This folder contains the Data Access Objects (DAOs), database connections and all the database-related logic.
+Here you manage how data is fetched, inserted, updated or deleted from the database. The DAO pattern is used
+to abstract the database interactions.
+
+What to include:
+
+* DAO interfaces
+* Room database definitions
+* Database connection configurations
+
+Examples:
+
+== Example [InventoryDB.kt] ==
+    // imports: uses rom (Database, Room, RoomDatabase), "model/" for objects, "util/" for constants
+    @Database(entities = [Inventory::class], version = 1)
+    abstract class InventoryDB : RoomDatabase() {
+
+        abstract fun inventoryDao(): InventoryDao
+
+        companion object{
+            fun getDatabase(context: Context): InventoryDB {
+                return Room.databaseBuilder(
+                    context.applicationContext,
+                    InventoryDB::class.java,
+                    NAME_BD
+                ).build()
+            }
+        }
+    }
+
+== Example [InventoryDao.kt] ==
+    // imports: uses rom (Dao, Insert, Query, Update,...), "model/" for objects
+    @Dao
+    interface InventoryDao {
+        @Insert(onConflict = OnConflictStrategy.REPLACE)
+        suspend fun saveInventory(inventory: Inventory)
+
+        @Query("SELECT * FROM Inventory")
+        suspend fun getListInventory(): MutableList<Inventory>
+
+        @Delete
+        suspend fun deleteInventory(inventory: Inventory)
+
+        @Update
+        suspend fun updateInventory(inventory: Inventory)
+    }
+

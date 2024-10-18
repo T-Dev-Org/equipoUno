@@ -1,0 +1,17 @@
+Purpose:
+
+This folder contains all UI-related classes, such as Activity, Fragments, Adapters and ViewHolders files.
+This is where the presentation layer resides. Each screen or UI component in the app should have
+its associated activity or fragment here, along with any custom views.
+
+What to include:
+
+* Activity and Fragment classes
+* Custom views
+* Layout-related classes
+
+Examples:
+
+* MainActivity.kt
+* LoginFragment.kt
+* CustomButton.kt
