@@ -6,4 +6,5 @@
     <string name="edit_icon">Edit icon</string>
     <string name="delete_icon">Delete icon</string>
     <string name="challenges_title">Challenges</string>
+    <string name="add_challenge">Add challenge</string>
 </resources>

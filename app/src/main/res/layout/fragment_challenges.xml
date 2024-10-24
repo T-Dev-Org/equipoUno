@@ -25,6 +25,19 @@
             app:layout_constraintTop_toTopOf="parent"
             android:text="Fragment Challenges" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingButtonAddChallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/add_challenge"
+            android:src="@drawable/ic_add"
+            android:backgroundTint="@color/challengeFragmentTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

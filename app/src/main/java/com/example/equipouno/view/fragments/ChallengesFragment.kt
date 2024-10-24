@@ -32,6 +32,14 @@ class ChallengesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
+        controlator()
+    }
+
+    private fun controlator() {
+        binding.floatingButtonAddChallenge.setOnClickListener {
+            // TODO: Mostrar interfaz de agregar reto
+            Toast.makeText(context, "TODO: Cuadro de texto agregar reto", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupToolbar() {

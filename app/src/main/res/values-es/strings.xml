@@ -5,4 +5,5 @@
     <string name="edit_icon">Editar</string>
     <string name="delete_icon">Eliminar</string>
     <string name="challenges_title">Retos</string>
+    <string name="add_challenge">Añadir reto</string>
 </resources>
