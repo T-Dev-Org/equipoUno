@@ -10,7 +10,12 @@
         android:background="@color/challengeFragmentBg"
         tools:context=".view.fragments.HomeFragment">
 
+        <include
+            android:id="@+id/challengeToolbar"
+            layout="@layout/toolbar_challenges"/>
+
         <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
