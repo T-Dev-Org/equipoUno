@@ -2,5 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red_700">#D32F2F</color>
+    <color name="green_700">#388E3C</color>
+    <color name="gray_700">#455A64</color>
+    <color name="orange_700">#E64A19</color>
     <color name="challengeFragmentBg">#FF414141</color>
 </resources>
