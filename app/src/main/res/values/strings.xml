@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">equipoUno</string>
+    <string name="app_name" translatable="false">equipoUno</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales sem sed nunc aliquet, eu sodales nisl iaculis. Praesent volutpat, dui id bibendum euismod, tortor augue tempus nulla, ac laoreet lectus metus ut tellus. In tempor auctor imperdiet. Praesent nulla odio, malesuada in arcu euismod, imperdiet viverra neque. Vivamus ut mauris et orci luctus elementum. Donec a quam nisi. Cras ornare justo elit, quis pulvinar felis imperdiet eu. Vestibulum consectetur et magna sit amet ornare. Suspendisse nec lectus fringilla, consequat tellus id, malesuada orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus mollis metus eget libero mollis lacinia non sit amet tellus. </string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales sem sed nunc aliquet, eu sodales nisl iaculis. Praesent volutpat, dui id bibendum euismod, tortor augue tempus nulla, ac laoreet lectus metus ut tellus. In tempor auctor imperdiet. Praesent nulla odio, malesuada in arcu euismod, imperdiet viverra neque. Vivamus ut mauris et orci luctus elementum. Donec a quam nisi. Cras ornare justo elit, quis pulvinar felis imperdiet eu. Vestibulum consectetur et magna sit amet ornare. Suspendisse nec lectus fringilla, consequat tellus id, malesuada orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus mollis metus eget libero mollis lacinia non sit amet tellus. </string>
     <string name="first_icon">First icon</string>
     <string name="edit_icon">Edit icon</string>
     <string name="delete_icon">Delete icon</string>
+    <string name="challenges_title">Challenges</string>
 </resources>

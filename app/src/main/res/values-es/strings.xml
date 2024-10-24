@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_icon">Primer icono</string>
+    <string name="edit_icon">Editar</string>
+    <string name="delete_icon">Eliminar</string>
+    <string name="challenges_title">Retos</string>
+</resources>
