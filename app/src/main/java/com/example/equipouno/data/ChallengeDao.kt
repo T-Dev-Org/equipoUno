@@ -13,7 +13,7 @@ interface ChallengeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertChallenge(challenge: Challenge)
 
-    @Query("SELECT * FROM Challenge")
+    @Query("SELECT * FROM Challenge ORDER BY id DESC")
     fun getListChallenge(): MutableList<Challenge>
 
     @Query("SELECT * FROM Challenge WHERE id = :id")

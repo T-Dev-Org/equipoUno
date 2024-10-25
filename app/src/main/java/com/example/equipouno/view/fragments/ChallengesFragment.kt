@@ -5,16 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentChallengesBinding
+import com.example.equipouno.view.adapter.ChallengeAdapter
+import com.example.equipouno.viewmodel.ChallengeViewModel
 
 class ChallengesFragment : Fragment() {
 
     private lateinit var binding: FragmentChallengesBinding
+    private val challengeViewModel: ChallengeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +40,36 @@ class ChallengesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         controlator()
+        observerViewModel()
     }
 
     private fun controlator() {
         binding.floatingButtonAddChallenge.setOnClickListener {
             // TODO: Mostrar interfaz de agregar reto
             Toast.makeText(context, "TODO: Cuadro de texto agregar reto", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun observerViewModel() {
+        observerListChallenge()
+        observerProgress()
+    }
+
+    private fun observerListChallenge(){
+        challengeViewModel.getListChallenge()
+        challengeViewModel.listChallenge.observe(viewLifecycleOwner) { listChallenge ->
+            val recycler = binding.recyclerView
+            val layoutManager = LinearLayoutManager(context)
+            recycler.layoutManager = layoutManager
+            val adapter = ChallengeAdapter(listChallenge, findNavController())
+            recycler.adapter = adapter
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun observerProgress(){
+        challengeViewModel.progressState.observe(viewLifecycleOwner){ status ->
+            binding.progressBar.isVisible = status
         }
     }
 
@@ -51,7 +82,7 @@ class ChallengesFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = null
 
         // Esto asegura de que el TextView en el Toolbar tenga el texto correcto
-        binding.toolbarTitle.text = getString(R.string.challenges_title)
+        //binding.toolbarTitle.text = getString(R.string.challenges_title)
 
         // Configura navegación al HomeFragment
         toolbar.setNavigationOnClickListener {
