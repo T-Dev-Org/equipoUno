@@ -56,15 +56,9 @@ class ChallengesFragment : Fragment() {
         // Configura navegación al HomeFragment
         toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
-            unmuteAudio()
         }
 
         // Esto asegura que se establece correctamente el boton de para vovler
         toolbar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_back)
-    }
-
-    private fun unmuteAudio() {
-        // TODO: Añadir la lógica para desactivar el silencio
-        Toast.makeText(context, "TODO: Desilenciar audio", Toast.LENGTH_SHORT).show()
     }
 }
