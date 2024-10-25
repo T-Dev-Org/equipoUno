@@ -17,6 +17,7 @@ import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentChallengesBinding
 import com.example.equipouno.view.adapter.ChallengeAdapter
 import com.example.equipouno.viewmodel.ChallengeViewModel
+import com.example.equipouno.view.dialogue.CustomDialog.Companion.showCustomDialog
 
 class ChallengesFragment : Fragment() {
 
@@ -47,6 +48,7 @@ class ChallengesFragment : Fragment() {
         binding.floatingButtonAddChallenge.setOnClickListener {
             // TODO: Mostrar interfaz de agregar reto
             Toast.makeText(context, "TODO: Cuadro de texto agregar reto", Toast.LENGTH_SHORT).show()
+            showCustomDialog(binding.root.context)
         }
     }
 
