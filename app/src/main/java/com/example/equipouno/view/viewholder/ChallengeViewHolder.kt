@@ -7,7 +7,8 @@ import com.example.equipouno.databinding.ItemChallengeBinding
 import com.example.equipouno.model.Challenge
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import com.example.equipouno.view.dialogue.CustomDialog.Companion.showCustomDialog
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.equipouno.view.dialogue.CustomDialog
 import com.example.equipouno.view.dialogue.StandardDialog.Companion.showDialog
 
 class ChallengeViewHolder(
@@ -26,7 +27,19 @@ class ChallengeViewHolder(
             bindingItem.imgbtnEdit.setOnClickListener {
                 bindingItem.imgbtnEdit.startAnimation(pressAnimation)
                 // Acción para editar el reto
-                showCustomDialog(bindingItem.root.context)
+                // TODO: Crear funcionalidad de edicion
+                CustomDialog.showCustomDialog(
+                    context = bindingItem.root.context,
+                    title = "Editar Reto",
+                    hint = "Escriba el reto",
+                    positiveButtonText = "Guardar",
+                    negativeButtonText = "Cancelar",
+                    // TODO: Crear funcionalidad para guardar reto
+                    onPositiveClick = {
+                        Toast.makeText(bindingItem.root.context, "Modification not implemented yet", Toast.LENGTH_SHORT).show()
+                    },
+                    onNegativeClick = {}
+                )
             }
 
             // Agregar animación al pulsar el botón de eliminar

@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -16,8 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentChallengesBinding
 import com.example.equipouno.view.adapter.ChallengeAdapter
+import com.example.equipouno.view.dialogue.CustomDialog
 import com.example.equipouno.viewmodel.ChallengeViewModel
-import com.example.equipouno.view.dialogue.CustomDialog.Companion.showCustomDialog
 
 class ChallengesFragment : Fragment() {
 
@@ -46,9 +45,20 @@ class ChallengesFragment : Fragment() {
 
     private fun controlator() {
         binding.floatingButtonAddChallenge.setOnClickListener {
-            // TODO: Mostrar interfaz de agregar reto
+
             Toast.makeText(context, "TODO: Cuadro de texto agregar reto", Toast.LENGTH_SHORT).show()
-            showCustomDialog(binding.root.context)
+            CustomDialog.showCustomDialog(
+                context = requireContext(),
+                title = "Agregar Reto",
+                hint = "Escriba el reto",
+                positiveButtonText = "Guardar",
+                negativeButtonText = "Cancelar",
+                // TODO: Crear funcionalidad para guardar reto
+                onPositiveClick = {
+                    Toast.makeText(context, "Creation not implemented yet", Toast.LENGTH_SHORT).show()
+                },
+                onNegativeClick = {}
+            )
         }
     }
 
