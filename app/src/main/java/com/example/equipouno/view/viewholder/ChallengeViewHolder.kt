@@ -6,18 +6,16 @@ import com.example.equipouno.R
 import com.example.equipouno.databinding.ItemChallengeBinding
 import com.example.equipouno.model.Challenge
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import com.example.equipouno.view.dialogue.CustomDialog
 import com.example.equipouno.view.dialogue.StandardDialog.Companion.showDialog
-import com.example.equipouno.viewmodel.ChallengeViewModel
 
 class ChallengeViewHolder(
     binding: ItemChallengeBinding,
     navController: NavController) :
     RecyclerView.ViewHolder(binding.root){
+
         val bindingItem = binding
-        // private val challengeViewModel: ChallengeViewModel by viewModels()
-        //val navController = navController
+
         fun setItemChallenge(challenge: Challenge) {
             bindingItem.tvDescription.text = challenge.description
 

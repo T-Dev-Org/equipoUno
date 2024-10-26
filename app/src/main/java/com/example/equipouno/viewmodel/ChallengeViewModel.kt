@@ -10,12 +10,12 @@ import com.example.equipouno.repository.ChallengeRepository
 import kotlinx.coroutines.launch
 
 class ChallengeViewModel(application: Application) : AndroidViewModel(application) {
-    
+
     val context = getApplication<Application>()
     private val challengeRepository = ChallengeRepository(context)
 
-    private val _listChallenge = MutableLiveData<MutableList<Challenge>>()
-    val listChallenge: LiveData<MutableList<Challenge>> get() = _listChallenge
+    private val _listChallenge = MutableLiveData<List<Challenge>>()
+    val listChallenge: LiveData<List<Challenge>> get() = _listChallenge
 
     private val _progressState = MutableLiveData(false)
     val progressState: LiveData<Boolean> = _progressState
@@ -25,6 +25,7 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
             _progressState.value = true
             try {
                 challengeRepository.insertChallenge(challenge)
+                getListChallenge()
                 _progressState.value = false
             } catch (e: Exception) {
                 _progressState.value = false
@@ -37,6 +38,7 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
             _progressState.value = true
             try {
                 challengeRepository.updateChallenge(challenge)
+                getListChallenge()
                 _progressState.value = false
             } catch (e: Exception) {
                 _progressState.value = false
@@ -61,6 +63,7 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
             _progressState.value = true
             try {
                 challengeRepository.deleteChallenge(challenge)
+                getListChallenge()
                 _progressState.value = false
             } catch (e: Exception) {
                 _progressState.value = false

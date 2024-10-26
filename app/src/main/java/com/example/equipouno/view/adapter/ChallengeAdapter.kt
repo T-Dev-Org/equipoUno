@@ -8,7 +8,7 @@ import com.example.equipouno.databinding.ItemChallengeBinding
 import com.example.equipouno.model.Challenge
 import com.example.equipouno.view.viewholder.ChallengeViewHolder
 
-class ChallengeAdapter(private val listChallenge: MutableList<Challenge>,
+class ChallengeAdapter(private val listChallenge: List<Challenge>,
     private val navController: NavController): RecyclerView.Adapter<ChallengeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder {
         val binding = ItemChallengeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
