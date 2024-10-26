@@ -6,6 +6,7 @@ import com.example.equipouno.R
 import com.example.equipouno.databinding.ItemChallengeBinding
 import com.example.equipouno.model.Challenge
 import android.view.animation.AnimationUtils
+import com.example.equipouno.view.dialogue.ConfirmationDialog
 import com.example.equipouno.view.dialogue.CustomDialog
 import com.example.equipouno.viewmodel.ChallengeViewModel
 
@@ -38,6 +39,20 @@ class ChallengeViewHolder(
                     viewModel.updateChallenge(updatedChallenge)
                 },
                 onNegativeClick = {}
+            )
+        }
+
+        // Botón Eliminar
+        binding.imgbtnDelete.setOnClickListener {
+            ConfirmationDialog.showConfirmationDialog(
+                binding.root.context,
+                challenge.description,
+                onConfirm = {
+                    viewModel.deleteChallenge(challenge)
+                },
+                onCancel = {
+
+                }
             )
         }
     }

@@ -7,4 +7,7 @@
     <string name="delete_icon">Delete icon</string>
     <string name="challenges_title">Challenges</string>
     <string name="add_challenge">Add challenge</string>
+    <string name="desea_eliminar_el_siguiente_reto">¿Desea eliminar el siguiente reto?:</string>
+    <string name="no">NO</string>
+    <string name="si">SI</string>
 </resources>
