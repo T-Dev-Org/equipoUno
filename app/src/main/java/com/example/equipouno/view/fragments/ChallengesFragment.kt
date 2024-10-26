@@ -45,7 +45,7 @@ class ChallengesFragment : Fragment() {
 
     private fun controlator() {
         binding.floatingButtonAddChallenge.setOnClickListener {
-            // TODO: Corregir el problema de actualizar la lista de retos al guardar uno nuevo
+            // TODO: Revisar bug. Al abrir la app desde cero no se actualiza la lista con el primer reto nuevo agregado
             CustomDialog.showCustomDialog(
                 context = requireContext(),
                 title = "Agregar Reto",
@@ -55,6 +55,7 @@ class ChallengesFragment : Fragment() {
                 onPositiveClick = { description ->
                     val newChallenge = Challenge(description = description)
                     challengeViewModel.saveChallenge(newChallenge)
+                    observerListChallenge()
                 },
                 onNegativeClick = {}
             )
