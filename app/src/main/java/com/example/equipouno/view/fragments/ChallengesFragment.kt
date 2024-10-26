@@ -45,7 +45,6 @@ class ChallengesFragment : Fragment() {
 
     private fun controlator() {
         binding.floatingButtonAddChallenge.setOnClickListener {
-            // TODO: Revisar bug. Al abrir la app desde cero no se actualiza la lista con el primer reto nuevo agregado
             CustomDialog.showCustomDialog(
                 context = requireContext(),
                 title = "Agregar Reto",
