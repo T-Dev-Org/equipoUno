@@ -6,16 +6,16 @@ import com.example.equipouno.R
 import com.example.equipouno.databinding.ItemChallengeBinding
 import com.example.equipouno.model.Challenge
 import android.view.animation.AnimationUtils
-import android.widget.Toast
-import com.example.equipouno.view.dialogue.CustomDialog.Companion.showCustomDialog
+import com.example.equipouno.view.dialogue.CustomDialog
 import com.example.equipouno.view.dialogue.StandardDialog.Companion.showDialog
 
 class ChallengeViewHolder(
     binding: ItemChallengeBinding,
     navController: NavController) :
     RecyclerView.ViewHolder(binding.root){
+
         val bindingItem = binding
-        //val navController = navController
+
         fun setItemChallenge(challenge: Challenge) {
             bindingItem.tvDescription.text = challenge.description
 
@@ -25,8 +25,19 @@ class ChallengeViewHolder(
             // Agregar animación al pulsar el botón de editar
             bindingItem.imgbtnEdit.setOnClickListener {
                 bindingItem.imgbtnEdit.startAnimation(pressAnimation)
-                // Acción para editar el reto
-                showCustomDialog(bindingItem.root.context)
+                // TODO: Crear funcionalidad de edicion
+                CustomDialog.showCustomDialog(
+                    context = bindingItem.root.context,
+                    title = "Editar Reto",
+                    hint = "Escriba el reto",
+                    positiveButtonText = "Guardar",
+                    negativeButtonText = "Cancelar",
+                    existingChallenge = challenge, // Pasar el reto existente
+                    onPositiveClick = { description ->
+                        val updatedChallenge = challenge.copy(description = description)
+                    },
+                    onNegativeClick = {}
+                )
             }
 
             // Agregar animación al pulsar el botón de eliminar
