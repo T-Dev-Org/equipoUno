@@ -67,13 +67,13 @@ class ChallengesFragment : Fragment() {
         observerProgress()
     }
 
-    private fun observerListChallenge(){
+    private fun observerListChallenge() {
         challengeViewModel.getListChallenge()
         challengeViewModel.listChallenge.observe(viewLifecycleOwner) { listChallenge ->
             val recycler = binding.recyclerView
             val layoutManager = LinearLayoutManager(context)
             recycler.layoutManager = layoutManager
-            val adapter = ChallengeAdapter(listChallenge, findNavController())
+            val adapter = ChallengeAdapter(listChallenge, findNavController(), challengeViewModel)
             recycler.adapter = adapter
             adapter.notifyDataSetChanged()
         }
