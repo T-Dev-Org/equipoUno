@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.equipouno.R
 import com.example.equipouno.databinding.CustomDialogBinding
+import com.example.equipouno.model.Challenge
 
 class CustomDialog {
     companion object {
@@ -17,7 +18,8 @@ class CustomDialog {
             hint: String,
             positiveButtonText: String,
             negativeButtonText: String,
-            onPositiveClick: () -> Unit,
+            existingChallenge: Challenge? = null,
+            onPositiveClick: (String) -> Unit,
             onNegativeClick: () -> Unit
         ) {
             val inflater = LayoutInflater.from(context)
@@ -28,17 +30,18 @@ class CustomDialog {
             alertDialog.setCancelable(false)
             alertDialog.setView(binding.root)
 
-            // Configurar título, hint y nombres de botones
             binding.dialogTitle.text = title
             binding.etChallenge.hint = hint
             binding.btnSave.text = positiveButtonText
             binding.btnCancel.text = negativeButtonText
 
-            // Deshabilitar btnSave y cambiar color inicialmente
+            existingChallenge?.let {
+                binding.etChallenge.setText(it.description)
+            }
+
             binding.btnSave.isEnabled = false
             binding.btnSave.setBackgroundColor(ContextCompat.getColor(context, R.color.gray_700))
 
-            // Agregar TextWatcher para habilitar/deshabilitar btnSave y cambiar color según el texto
             binding.etChallenge.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     val isNotEmpty = !s.isNullOrEmpty()
@@ -51,9 +54,9 @@ class CustomDialog {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
 
-            // Configurar funcionalidad de los botones
             binding.btnSave.setOnClickListener {
-                onPositiveClick()
+                val challengeDescription = binding.etChallenge.text.toString()
+                onPositiveClick(challengeDescription)
                 alertDialog.dismiss()
             }
 

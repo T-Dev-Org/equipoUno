@@ -7,15 +7,16 @@ import com.example.equipouno.databinding.ItemChallengeBinding
 import com.example.equipouno.model.Challenge
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.equipouno.view.dialogue.CustomDialog
 import com.example.equipouno.view.dialogue.StandardDialog.Companion.showDialog
+import com.example.equipouno.viewmodel.ChallengeViewModel
 
 class ChallengeViewHolder(
     binding: ItemChallengeBinding,
     navController: NavController) :
     RecyclerView.ViewHolder(binding.root){
         val bindingItem = binding
+        // private val challengeViewModel: ChallengeViewModel by viewModels()
         //val navController = navController
         fun setItemChallenge(challenge: Challenge) {
             bindingItem.tvDescription.text = challenge.description
@@ -33,9 +34,9 @@ class ChallengeViewHolder(
                     hint = "Escriba el reto",
                     positiveButtonText = "Guardar",
                     negativeButtonText = "Cancelar",
-                    // TODO: Crear funcionalidad para guardar reto
-                    onPositiveClick = {
-                        Toast.makeText(bindingItem.root.context, "Modification not implemented yet", Toast.LENGTH_SHORT).show()
+                    existingChallenge = challenge, // Pasar el reto existente
+                    onPositiveClick = { description ->
+                        val updatedChallenge = challenge.copy(description = description)
                     },
                     onNegativeClick = {}
                 )

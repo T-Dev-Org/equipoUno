@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -14,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentChallengesBinding
+import com.example.equipouno.model.Challenge
 import com.example.equipouno.view.adapter.ChallengeAdapter
 import com.example.equipouno.view.dialogue.CustomDialog
 import com.example.equipouno.viewmodel.ChallengeViewModel
@@ -45,15 +45,16 @@ class ChallengesFragment : Fragment() {
 
     private fun controlator() {
         binding.floatingButtonAddChallenge.setOnClickListener {
+            // TODO: Corregir el problema de actualizar la lista de retos al guardar uno nuevo
             CustomDialog.showCustomDialog(
                 context = requireContext(),
                 title = "Agregar Reto",
                 hint = "Escriba el reto",
                 positiveButtonText = "Guardar",
                 negativeButtonText = "Cancelar",
-                // TODO: Crear funcionalidad para guardar reto
-                onPositiveClick = {
-                    Toast.makeText(context, "Creation not implemented yet", Toast.LENGTH_SHORT).show()
+                onPositiveClick = { description ->
+                    val newChallenge = Challenge(description = description)
+                    challengeViewModel.saveChallenge(newChallenge)
                 },
                 onNegativeClick = {}
             )
