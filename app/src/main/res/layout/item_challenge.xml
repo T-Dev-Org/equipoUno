@@ -86,6 +86,7 @@
                     android:padding="8dp"
                     tools:text="@string/lorem"
                     android:textSize="14sp"
+                    android:textColor="@color/black"
                     app:layout_constraintTop_toTopOf="@id/guideline1" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
