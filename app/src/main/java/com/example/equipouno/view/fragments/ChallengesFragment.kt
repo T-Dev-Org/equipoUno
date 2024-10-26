@@ -45,8 +45,6 @@ class ChallengesFragment : Fragment() {
 
     private fun controlator() {
         binding.floatingButtonAddChallenge.setOnClickListener {
-
-            Toast.makeText(context, "TODO: Cuadro de texto agregar reto", Toast.LENGTH_SHORT).show()
             CustomDialog.showCustomDialog(
                 context = requireContext(),
                 title = "Agregar Reto",

@@ -26,7 +26,6 @@ class ChallengeViewHolder(
             // Agregar animación al pulsar el botón de editar
             bindingItem.imgbtnEdit.setOnClickListener {
                 bindingItem.imgbtnEdit.startAnimation(pressAnimation)
-                // Acción para editar el reto
                 // TODO: Crear funcionalidad de edicion
                 CustomDialog.showCustomDialog(
                     context = bindingItem.root.context,
