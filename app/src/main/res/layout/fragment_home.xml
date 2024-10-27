@@ -9,6 +9,9 @@
         android:layout_height="match_parent"
         tools:context=".view.fragments.HomeFragment">
 
+        <include
+            layout="@layout/main_toolbar"/>
+
         <TextView
             android:id="@+id/tvSample"
             android:layout_width="wrap_content"
