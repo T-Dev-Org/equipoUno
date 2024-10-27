@@ -7,6 +7,7 @@ import com.example.equipouno.model.Challenge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.Date
+import kotlin.random.Random
 
 class ChallengeRepository(context: Context) {
     private val challengeDao: ChallengeDao = AppDatabase.getDatabase(context).challengeDao()
@@ -48,6 +49,15 @@ class ChallengeRepository(context: Context) {
     suspend fun deleteChallenge(challenge: Challenge) {
         withContext(Dispatchers.IO) {
             challengeDao.deleteChallenge(challenge)
+        }
+    }
+
+    suspend fun getRandomChallenge(): Challenge? {
+        val challenges = getListChallenge()
+        return if (challenges.isNotEmpty()) {
+            challenges[Random.nextInt(challenges.size)]
+        } else {
+            null
         }
     }
 }
