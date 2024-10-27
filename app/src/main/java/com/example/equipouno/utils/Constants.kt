@@ -2,6 +2,8 @@ package com.example.equipouno.utils
 
 object Constants {
     const val NAME_BD: String ="BotelleoApp.db"
+    const val BASE_URL="https://pokeapi.co/api/v2/"
+    const val END_POINT="pokemon"
 
     object challengeTable {
         const val TABLE_NAME = "challenge"
