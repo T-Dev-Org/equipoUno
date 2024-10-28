@@ -10,4 +10,12 @@
     <string name="desea_eliminar_el_siguiente_reto">¿Desea eliminar el siguiente reto?:</string>
     <string name="no">NO</string>
     <string name="si">SI</string>
+
+    <string name="Lcomojugar">How to play?</string>
+    <string name="explication">Players form a circle and place the mobile device in the center, then touch the flashing button to rotate the bottle.</string>
+    <string name="explication2">The player who points to the bottle must meet the challenge set by the app, otherwise he/she leaves the game.</string>
+    <string name="LquienGana">Who wins?</string>
+    <string name="respuesta_quien_gana">The last player who does not quit the game wins</string>
+
+    <string name="reglas">Game rules</string>
 </resources>

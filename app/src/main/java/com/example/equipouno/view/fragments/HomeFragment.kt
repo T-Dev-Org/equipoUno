@@ -158,4 +158,5 @@ class HomeFragment : Fragment() {
             icono.setImageResource(R.drawable.ic_volume_up)
         }
     }
+
 }
