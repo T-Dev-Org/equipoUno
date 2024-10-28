@@ -11,7 +11,8 @@
         tools:context=".view.fragments.HomeFragment">
 
         <include
-            layout="@layout/fragment_bottle"/>
+            layout="@layout/fragment_bottle"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
