@@ -36,7 +36,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initListeners()
         if (!isMuted) {
             playSoundtrack()
         }
@@ -55,11 +54,6 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         releaseSoundtrack()
-    }
-
-    private fun initListeners(){
-        addListenerBtnGoToChallenges()
-        addListenerBtnGoToInstructions()
     }
 
     private fun pauseSoundtrack() {
@@ -97,18 +91,6 @@ class HomeFragment : Fragment() {
         mediaPlayer.setOnCompletionListener {
             mediaPlayer.seekTo(0) // Volver al inicio de la canción
             mediaPlayer.start()   // Reproducir nuevamente
-        }
-    }
-
-    private fun addListenerBtnGoToChallenges(){
-        binding.btnGoToChallenges.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_challengesFragment)
-        }
-    }
-
-    private fun addListenerBtnGoToInstructions(){
-        binding.btnGoToInstructions.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
         }
     }
 }
