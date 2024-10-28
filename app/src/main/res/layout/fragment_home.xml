@@ -7,38 +7,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/wood_floor"
         tools:context=".view.fragments.HomeFragment">
 
-        <TextView
-            android:id="@+id/tvSample"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Fragment Home" />
-
-        <Button
-            android:id="@+id/btnGoToChallenges"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/tvSample"
-            app:layout_constraintEnd_toEndOf="@id/tvSample"
-            app:layout_constraintTop_toBottomOf="@id/tvSample"
-            android:text="Go to challenges"
-            />
-
-        <Button
-            android:id="@+id/btnGoToInstructions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/btnGoToChallenges"
-            app:layout_constraintEnd_toEndOf="@id/btnGoToChallenges"
-            app:layout_constraintTop_toBottomOf="@id/btnGoToChallenges"
-            android:text="Go to instructions"
-            />
+        <include
+            layout="@layout/fragment_bottle"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
