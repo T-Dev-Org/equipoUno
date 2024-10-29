@@ -10,4 +10,5 @@
     <string name="desea_eliminar_el_siguiente_reto">¿Desea eliminar el siguiente reto?:</string>
     <string name="no">NO</string>
     <string name="si">SI</string>
+    <string name="press_me">PRESS ME</string>
 </resources>
