@@ -18,4 +18,6 @@
     <string name="respuesta_quien_gana">The last player who does not quit the game wins</string>
 
     <string name="reglas">Game rules</string>
+
+    <string name="press_me">PRESS ME</string>
 </resources>

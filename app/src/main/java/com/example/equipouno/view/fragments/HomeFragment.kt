@@ -4,11 +4,14 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.VideoView
 import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import com.example.equipouno.R
@@ -39,13 +42,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         toolbarOptions()
 
-        initListeners()
         if (!isMuted) {
             playSoundtrack()
         }
+
+        pressButton()
     }
 
     override fun onResume() {
@@ -61,11 +64,6 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         releaseSoundtrack()
-    }
-
-    private fun initListeners(){
-        addListenerBtnGoToChallenges()
-        addListenerBtnGoToInstructions()
     }
 
     private fun pauseSoundtrack() {
@@ -106,16 +104,42 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun addListenerBtnGoToChallenges(){
-        binding.btnGoToChallenges.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_challengesFragment)
+    private fun pressButton()
+    {
+        //binding.orangeButton.setOnClickListener()
+        {
+            try {
+                if (!isMuted) {
+                    pauseSoundtrack()
+                }
+
+                binding.tvCountdown.visibility = View.VISIBLE
+                countdownTime()
+
+            } catch (e: Exception)
+            {
+                e.printStackTrace()
+                println("Para")
+            }
         }
     }
 
-    private fun addListenerBtnGoToInstructions(){
-        binding.btnGoToInstructions.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
-        }
+    private fun countdownTime() {
+        // Obtiene el valor del TextView y lo convierte a milisegundos
+        val countdown = binding.tvCountdown.text.toString().toInt() * 1000L
+
+        // Crea un temporizador que cuenta hacia atrás desde el valor inicial hasta 0
+        object : CountDownTimer(countdown, 1000) { // 1000 ms = 1 segundo
+            override fun onTick(millisUntilFinished: Long) {
+                // Actualiza el texto del TextView con el tiempo restante en segundos
+                binding.tvCountdown.text = (millisUntilFinished / 1000).toString()
+            }
+
+            override fun onFinish() {
+                // Cuando el contador llega a 0, establece el texto en "0" o realiza otra acción
+                binding.tvCountdown.text = "0"
+            }
+        }.start() // Inicia el contador
     }
 
 
