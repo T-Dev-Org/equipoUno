@@ -2,11 +2,14 @@ package com.example.equipouno.view.fragments
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.VideoView
 import androidx.navigation.fragment.findNavController
 import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentHomeBinding
@@ -39,6 +42,8 @@ class HomeFragment : Fragment() {
         if (!isMuted) {
             playSoundtrack()
         }
+
+        pressButton()
     }
 
     override fun onResume() {
@@ -92,5 +97,43 @@ class HomeFragment : Fragment() {
             mediaPlayer.seekTo(0) // Volver al inicio de la canción
             mediaPlayer.start()   // Reproducir nuevamente
         }
+    }
+
+    private fun pressButton()
+    {
+        binding.orangeButton.setOnClickListener()
+        {
+            try {
+                if (!isMuted) {
+                    pauseSoundtrack()
+                }
+
+                binding.tvCountdown.visibility = View.VISIBLE
+                countdownTime()
+
+            } catch (e: Exception)
+            {
+                e.printStackTrace()
+                println("Para")
+            }
+        }
+    }
+
+    private fun countdownTime() {
+        // Obtiene el valor del TextView y lo convierte a milisegundos
+        val countdown = binding.tvCountdown.text.toString().toInt() * 1000L
+
+        // Crea un temporizador que cuenta hacia atrás desde el valor inicial hasta 0
+        object : CountDownTimer(countdown, 1000) { // 1000 ms = 1 segundo
+            override fun onTick(millisUntilFinished: Long) {
+                // Actualiza el texto del TextView con el tiempo restante en segundos
+                binding.tvCountdown.text = (millisUntilFinished / 1000).toString()
+            }
+
+            override fun onFinish() {
+                // Cuando el contador llega a 0, establece el texto en "0" o realiza otra acción
+                binding.tvCountdown.text = "0"
+            }
+        }.start() // Inicia el contador
     }
 }
