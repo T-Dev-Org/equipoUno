@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
     private var isPaused = false
     private var isMuted = false // TODO: Util para el boton de la toolbar de silenciar y desilenciar
     private var currentPosition = 0
+    private var actDir = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,9 +55,6 @@ class HomeFragment : Fragment() {
 
         if (!isMuted) {
             playSoundtrack()
-        } else
-        {
-            pauseSoundtrack()
         }
 
         pressButton()
@@ -65,16 +63,19 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         resumeSoundtrack()
+        resumeBottleSound()
     }
 
     override fun onPause() {
         super.onPause()
         pauseSoundtrack()
+        pauseBottleSound()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         releaseSoundtrack()
+        releaseBottleSound()
     }
 
     private fun pauseSoundtrack() {
@@ -86,11 +87,29 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun pauseBottleSound() {
+        // Pausar el audio cuando el fragmento no esté visible
+        if (!isPaused) {
+            currentPosition = bottleMediaPlayer.currentPosition
+            bottleMediaPlayer.pause()  // Pausar la reproducción
+            isPaused = true      // Marcar que está pausado
+        }
+    }
+
     private fun resumeSoundtrack() {
         // Reanudar la música si estaba pausada
         if (isPaused and !isMuted) {
             mediaPlayer.seekTo(currentPosition)
             mediaPlayer.start()  // Reanudar la reproducción
+            isPaused = false
+        }
+    }
+
+    private fun resumeBottleSound() {
+        // Reanudar la música si estaba pausada
+        if (isPaused and !isMuted) {
+            bottleMediaPlayer.seekTo(currentPosition)
+            bottleMediaPlayer.start()  // Reanudar la reproducción
             isPaused = false
         }
     }
@@ -137,11 +156,11 @@ class HomeFragment : Fragment() {
 
     private fun pressButton()
     {
-        //binding.orangeButton.setOnClickListener()
+        binding.orangeButton.setOnClickListener()
         {
             try {
                 if (!isMuted) {
-                    releaseSoundtrack()
+                    pauseSoundtrack()
                 }
 
                 binding.tvCountdown.visibility = View.INVISIBLE
@@ -181,6 +200,7 @@ class HomeFragment : Fragment() {
                 binding.tvCountdown.text = "0"
                 binding.orangeButton.visibility = View.VISIBLE
                 binding.tvPressMe.visibility = View.VISIBLE
+                resumeSoundtrack()
             }
         }.start() // Inicia el contador
     }
@@ -229,12 +249,12 @@ class HomeFragment : Fragment() {
     {
         if(!spinning)
         {
-            val newPosition = currentPosition + Random.nextInt(2400 ,4200)
+            val newDir = actDir + Random.nextInt(2520 ,3600)
 
             val pivotX = binding.bottle.width / 2f
             val pivotY = binding.bottle.height / 2f
 
-            val rotate = RotateAnimation(currentPosition.toFloat(), newPosition.toFloat(), pivotX, pivotY).apply {
+            val rotate = RotateAnimation(actDir.toFloat(), newDir.toFloat(), pivotX, pivotY).apply {
                 duration = 5000
                 fillAfter = true
 
@@ -258,7 +278,7 @@ class HomeFragment : Fragment() {
                 })
             }
 
-            currentPosition = newPosition
+            actDir = newDir
 
             binding.bottle.startAnimation(rotate)
         }
