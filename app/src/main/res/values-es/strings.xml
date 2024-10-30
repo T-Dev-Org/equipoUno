@@ -17,4 +17,6 @@
     <string name="respuesta_quien_gana">Gana el último jugador que no abandone el juego</string>
     <string name="reglas">Reglas del juego</string>
     <string name="countdown_number">4</string>
+    <string name="close_button">Cerrar</string>
+    <string name="Challenge">Reto</string>
 </resources>

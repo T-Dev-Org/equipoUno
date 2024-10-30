@@ -21,4 +21,6 @@
 
     <string name="press_me">PRESS ME</string>
     <string name="countdown_number">4</string>
+    <string name="close_button">Close</string>
+    <string name="Challenge">Challenge</string>
 </resources>
