@@ -23,6 +23,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             />
 
+        <include
+            layout="@layout/main_toolbar"/>
+
         <TextView
             android:id="@+id/tvCountdown"
             android:layout_width="30dp"

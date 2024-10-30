@@ -1,6 +1,8 @@
 package com.example.equipouno.view.fragments
 
+import android.content.Intent
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -12,11 +14,13 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.TextView
 import android.widget.VideoView
+import android.widget.ImageView
 import androidx.databinding.adapters.ViewGroupBindingAdapter.OnAnimationEnd
 import androidx.navigation.fragment.findNavController
 import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentBottleBinding
 import com.example.equipouno.databinding.FragmentHomeBinding
+import retrofit2.http.Url
 import kotlin.random.Random
 
 class HomeFragment : Fragment() {
@@ -46,6 +50,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolbarOptions()
 
         if (!isMuted) {
             playSoundtrack()
@@ -132,7 +137,7 @@ class HomeFragment : Fragment() {
 
     private fun pressButton()
     {
-        binding.orangeButton.setOnClickListener()
+        //binding.orangeButton.setOnClickListener()
         {
             try {
                 if (!isMuted) {
@@ -178,6 +183,46 @@ class HomeFragment : Fragment() {
                 binding.tvPressMe.visibility = View.VISIBLE
             }
         }.start() // Inicia el contador
+    }
+
+    private  fun toolbarOptions(){
+        val calificacion = view?.findViewById<ImageView>(R.id.calificacion)
+        val volumen = view?.findViewById<ImageView>(R.id.volumen)
+        val informacion = view?.findViewById<ImageView>(R.id.instrucciones)
+        val agregar = view?.findViewById<ImageView>(R.id.agregar)
+        val compartir = view?.findViewById<ImageView>(R.id.compartir)
+
+        calificacion?.setOnClickListener{
+            rateApp()
+        }
+
+        volumen?.setOnClickListener{
+            setMusic(volumen)
+        }
+
+        informacion?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
+        }
+
+        agregar?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_challengesFragment)
+        }
+    }
+
+    private fun rateApp(){
+        val calificar = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_419&gl=es"))
+        startActivity(calificar)
+    }
+
+    private fun setMusic(icono : ImageView){
+        isMuted = !isMuted
+        if(isMuted){
+            pauseSoundtrack()
+            icono.setImageResource(R.drawable.ic_volume_off)
+        }else{
+            resumeSoundtrack()
+            icono.setImageResource(R.drawable.ic_volume_up)
+        }
     }
 
     private fun bottleSpin(onAnimationEnd: () -> Unit)
