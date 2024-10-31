@@ -12,14 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
-import android.widget.TextView
-import android.widget.VideoView
 import android.widget.ImageView
-import androidx.databinding.adapters.ViewGroupBindingAdapter.OnAnimationEnd
 import androidx.navigation.fragment.findNavController
 import com.example.equipouno.R
-import com.example.equipouno.databinding.FragmentBottleBinding
 import com.example.equipouno.databinding.FragmentHomeBinding
+import com.example.equipouno.repository.ChallengeRepository
+import com.example.equipouno.repository.PokemonRepository
+import com.example.equipouno.view.dialogue.ChallengeDialog
 import retrofit2.http.Url
 import kotlin.random.Random
 
@@ -28,12 +27,15 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var bottleMediaPlayer: MediaPlayer
+    private lateinit var challengeRepository: ChallengeRepository // Instancia del repositorio de retos
+    private lateinit var pokemonRepository: PokemonRepository // Instancia del repositorio de Pokémon
     private var timer: CountDownTimer? = null
     private var spinning = false
     private var isPaused = false
     private var isMuted = false // TODO: Util para el boton de la toolbar de silenciar y desilenciar
     private var currentPosition = 0
     private var actDir = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +53,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        challengeRepository = ChallengeRepository(requireContext())
+        pokemonRepository = PokemonRepository()
         toolbarOptions()
 
         if (!isMuted) {
@@ -200,7 +204,9 @@ class HomeFragment : Fragment() {
                 binding.tvCountdown.text = "0"
                 binding.orangeButton.visibility = View.VISIBLE
                 binding.tvPressMe.visibility = View.VISIBLE
+                binding.tvCountdown.visibility = View.INVISIBLE
                 resumeSoundtrack()
+                challengeDialog()
             }
         }.start() // Inicia el contador
     }
@@ -282,5 +288,17 @@ class HomeFragment : Fragment() {
 
             binding.bottle.startAnimation(rotate)
         }
+    }
+
+    private fun challengeDialog() {
+        ChallengeDialog.showChallengeDialog(
+            context = requireContext(),
+            challengeRepository = challengeRepository,
+            pokemonRepository = pokemonRepository,
+            btnCloseText = "Cerrar",
+            onDialogClose = {
+                // Puedes agregar cualquier acción que necesites al cerrar el diálogo
+            }
+        )
     }
 }
