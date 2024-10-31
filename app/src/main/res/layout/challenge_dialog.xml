@@ -23,13 +23,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/selectedChallenge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:layout_marginBottom="60dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/Challenge"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -45,6 +45,9 @@
             android:id="@+id/ivChallengeImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:background="@drawable/circle_challenge_dialog"
+            android:backgroundTint="@color/black"
+            android:backgroundTintMode="add"
             tools:ignore="ContentDescription"
             app:layout_constraintTop_toTopOf="@id/cdLayout"
             app:layout_constraintStart_toStartOf="@id/cdLayout"
