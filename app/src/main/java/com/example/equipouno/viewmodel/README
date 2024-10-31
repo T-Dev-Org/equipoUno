@@ -1,0 +1,104 @@
+Purpose:
+
+The view models contain the business logic and act as an intermediary between the views and repositories.
+The ViewModel observes changes in the data and notifies the view to update.
+Each screen or feature should have a corresponding view model.
+
+What to include:
+
+* ViewModel classes
+* LiveData variables and observers
+* Functions that manage data for the views
+
+Examples:
+
+* UserViewModel.kt
+* LoginViewModel.kt
+* NoteViewModel.kt
+
+== Example [InventoryViewModel.kt] ==
+    // imports: Uses lifecycle, coroutines, "model/" for objects and "repository/" for instance assigning it his viewmodel context
+    class InventoryViewModel(application: Application) : AndroidViewModel(application) {
+
+        val context = getApplication<Application>()
+        private val inventoryRepository = InventoryRepository(context)
+
+        private val _listInventory = MutableLiveData<MutableList<Inventory>>()
+        val listInventory: LiveData<MutableList<Inventory>> get() = _listInventory
+
+        private val _progresState = MutableLiveData(false)
+        val progresState: LiveData<Boolean> = _progresState
+
+        private val _listProducts = MutableLiveData<MutableList<Product>>() //para almacenar una lista de productos
+        val listProducts: LiveData<MutableList<Product>> = _listProducts
+
+        fun getListInventory() {
+            viewModelScope.launch {
+                _progresState.value = true
+                try {
+                    _listInventory.value = inventoryRepository.getListInventory()
+                    _progresState.value = false
+                } catch (e: Exception) {
+                    _progresState.value = false
+                }
+
+            }
+        }
+
+        fun saveInventory(inventory: Inventory) {
+                viewModelScope.launch {
+                    _progresState.value = true
+                    try {
+                        inventoryRepository.saveInventory(inventory)
+                        _progresState.value = false
+                    } catch (e: Exception) {
+                        _progresState.value = false
+                    }
+                }
+        }
+
+        fun updateInventory(inventory: Inventory) {
+                viewModelScope.launch {
+                    _progresState.value = true
+                    try {
+                        inventoryRepository.updateRepositoy(inventory)
+                        _progresState.value = false
+                    } catch (e: Exception) {
+                        _progresState.value = false
+                    }
+                }
+        }
+
+        fun deleteInventory(inventory: Inventory) {
+            viewModelScope.launch {
+                _progresState.value = true
+                try {
+                    inventoryRepository.deleteInventory(inventory)
+                    _progresState.value = false
+                } catch (e: Exception) {
+                    _progresState.value = false
+                }
+
+            }
+        }
+
+        fun getProducts() {
+            viewModelScope.launch {
+                _progresState.value = true
+                try {
+                    _listProducts.value = inventoryRepository.getProducts()
+                    _progresState.value = false
+
+                } catch (e: Exception) {
+                    _progresState.value = false
+                }
+            }
+        }
+
+        ...
+
+        fun totalProducto(price: Int, quantity: Int): Double {
+            val total = price * quantity
+            return total.toDouble()
+        }
+    }

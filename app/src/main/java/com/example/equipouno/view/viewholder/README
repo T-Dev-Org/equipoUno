@@ -1,0 +1,38 @@
+Purpose:
+
+This folder contains all ViewHolder classes.
+ViewHolders are used in conjunction with adapters to efficiently manage and reuse views in RecyclerView.
+Each ViewHolder holds references to the views in each item of the RecyclerView to minimize view lookups.
+
+What to include:
+
+* ViewHolder classes that hold references to item views
+* Logic to bind data to the individual views in the view holder
+
+Examples:
+
+* HeroViewHolder.kt
+* InventoryViewHolder.kt
+* GalleryViewHolder.kt
+
+== Example [InventoryViewHolder.kt]
+    //imports
+    class InventoryViewHolder(binding: ItemInventoryBinding, navController: NavController) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        val bindingItem = binding
+        val navController = navController
+
+        fun setItemInventory(inventory: Inventory) {
+            bindingItem.tvName.text = inventory.name
+            bindingItem.tvPrice.text = "$ ${inventory.price}"
+            bindingItem.tvQuantity.text = "${inventory.quantity}"
+
+            bindingItem.cvInventory.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putSerializable("clave", inventory)
+                navController.navigate(R.id.action_homeInventoryFragment_to_itemDetailsFragment, bundle)
+            }
+
+        }
+    }

@@ -1,0 +1,43 @@
+Purpose:
+
+This folder contains API service definitions and network clients.
+ handles the communication with web services, such as making REST API calls using Retrofit or other HTTP clients.
+
+What to include:
+
+* API service interfaces
+* Retrofit client instances
+* HTTP request handling
+
+Examples:
+
+* ApiService.kt
+* ApiUtils.kt
+* RetrofitClient.kt
+
+== Example [ApiService.kt] ==
+    //imports: From retrofit and from "utils/" to get constants (END_POINT)
+    interface ApiService {
+        @GET(END_POINT)
+        suspend fun getProducts(): MutableList<Product>
+    }
+
+== Example [ApiUtils.kt] ==
+    class ApiUtils {
+        companion object{
+            fun getApiService():ApiService{
+                return RetrofitClient.getRetrofit().create(ApiService::class.java)
+            }
+        }
+    }
+
+== Example [RetrofitClient.kt] ==
+    //imports: From retrofit and from "utils" to get constants (BASE_URL)
+    object RetrofitClient {
+        fun getRetrofit(): Retrofit {
+            return Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
+    }

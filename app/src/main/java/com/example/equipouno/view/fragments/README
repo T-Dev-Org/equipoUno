@@ -1,0 +1,17 @@
+Purpose:
+
+This folder contains all the Fragment classes.
+A Fragment represents a portion of the user interface within an activity
+and it is often used for modular UI components that can be reused across multiple activities.
+
+What to include:
+
+* Fragment classes representing different parts of the UI
+* Code that handles fragment lifecycle and UI logic
+* Navigation between fragments (if needed)
+
+Examples:
+
+* HomeFragment.kt
+* DetailFragment.kt
+* ProfileFragment.kt
