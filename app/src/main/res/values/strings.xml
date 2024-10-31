@@ -23,4 +23,6 @@
     <string name="countdown_number">4</string>
     <string name="close_button">Close</string>
     <string name="Challenge">Challenge</string>
+
+    <string name="title">Pico botella</string>
 </resources>

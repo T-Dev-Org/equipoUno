@@ -55,6 +55,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         challengeRepository = ChallengeRepository(requireContext())
         pokemonRepository = PokemonRepository()
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
         toolbarOptions()
 
         if (!isMuted) {
@@ -68,6 +69,7 @@ class HomeFragment : Fragment() {
         super.onResume()
         resumeSoundtrack()
         resumeBottleSound()
+        updateVolumeIcon()
     }
 
     override fun onPause() {
@@ -134,7 +136,7 @@ class HomeFragment : Fragment() {
 
     private fun playSoundtrack(){
         // Se le pasa la pista de audio
-        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
+        //mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
 
         // Se inicia la reproducción
         mediaPlayer.start()
@@ -223,15 +225,33 @@ class HomeFragment : Fragment() {
         }
 
         volumen?.setOnClickListener{
-            setMusic(volumen)
+            setMusic()
         }
 
         informacion?.setOnClickListener {
+            if(!isMuted){
+                pauseSoundtrack()
+            }
             findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
         }
 
         agregar?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_challengesFragment)
+        }
+
+        compartir?.setOnClickListener {
+            val text1 = "App pico botella"
+            val text2 = "¡Solo los valientes lo juegan!"
+            val url = "https://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_419&gl=es"
+
+            val shareText = "$text1\n$text2\n$url"
+
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, shareText)
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(shareIntent, "Compartir con"))
         }
     }
 
@@ -240,14 +260,22 @@ class HomeFragment : Fragment() {
         startActivity(calificar)
     }
 
-    private fun setMusic(icono : ImageView){
+    private fun setMusic(){
         isMuted = !isMuted
         if(isMuted){
             pauseSoundtrack()
-            icono.setImageResource(R.drawable.ic_volume_off)
         }else{
             resumeSoundtrack()
-            icono.setImageResource(R.drawable.ic_volume_up)
+        }
+        updateVolumeIcon()
+    }
+
+    private fun updateVolumeIcon() {
+        val volumen = view?.findViewById<ImageView>(R.id.volumen)
+        if (isMuted) {
+            volumen?.setImageResource(R.drawable.ic_volume_off)
+        } else {
+            volumen?.setImageResource(R.drawable.ic_volume_up)
         }
     }
 

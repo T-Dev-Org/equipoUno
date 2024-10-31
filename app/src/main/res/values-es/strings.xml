@@ -19,4 +19,5 @@
     <string name="countdown_number">4</string>
     <string name="close_button">Cerrar</string>
     <string name="Challenge">Reto</string>
+    <string name="title">Pico botella</string>
 </resources>
