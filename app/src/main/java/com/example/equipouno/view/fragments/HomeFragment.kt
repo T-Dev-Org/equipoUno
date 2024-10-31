@@ -55,6 +55,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         challengeRepository = ChallengeRepository(requireContext())
         pokemonRepository = PokemonRepository()
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
         toolbarOptions()
 
         if (!isMuted) {
@@ -68,6 +69,7 @@ class HomeFragment : Fragment() {
         super.onResume()
         resumeSoundtrack()
         resumeBottleSound()
+        updateVolumeIcon()
     }
 
     override fun onPause() {
@@ -134,7 +136,7 @@ class HomeFragment : Fragment() {
 
     private fun playSoundtrack(){
         // Se le pasa la pista de audio
-        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
+        //mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
 
         // Se inicia la reproducción
         mediaPlayer.start()
@@ -223,10 +225,13 @@ class HomeFragment : Fragment() {
         }
 
         volumen?.setOnClickListener{
-            setMusic(volumen)
+            setMusic()
         }
 
         informacion?.setOnClickListener {
+            if(!isMuted){
+                pauseSoundtrack()
+            }
             findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
         }
 
@@ -255,14 +260,22 @@ class HomeFragment : Fragment() {
         startActivity(calificar)
     }
 
-    private fun setMusic(icono : ImageView){
+    private fun setMusic(){
         isMuted = !isMuted
         if(isMuted){
             pauseSoundtrack()
-            icono.setImageResource(R.drawable.ic_volume_off)
         }else{
             resumeSoundtrack()
-            icono.setImageResource(R.drawable.ic_volume_up)
+        }
+        updateVolumeIcon()
+    }
+
+    private fun updateVolumeIcon() {
+        val volumen = view?.findViewById<ImageView>(R.id.volumen)
+        if (isMuted) {
+            volumen?.setImageResource(R.drawable.ic_volume_off)
+        } else {
+            volumen?.setImageResource(R.drawable.ic_volume_up)
         }
     }
 
