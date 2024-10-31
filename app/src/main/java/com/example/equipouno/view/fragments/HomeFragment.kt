@@ -5,7 +5,6 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,6 @@ import com.example.equipouno.databinding.FragmentHomeBinding
 import com.example.equipouno.repository.ChallengeRepository
 import com.example.equipouno.repository.PokemonRepository
 import com.example.equipouno.view.dialogue.ChallengeDialog
-import retrofit2.http.Url
 import kotlin.random.Random
 
 class HomeFragment : Fragment() {
@@ -207,7 +205,6 @@ class HomeFragment : Fragment() {
                 binding.orangeButton.visibility = View.VISIBLE
                 binding.tvPressMe.visibility = View.VISIBLE
                 binding.tvCountdown.visibility = View.INVISIBLE
-                resumeSoundtrack()
                 challengeDialog()
             }
         }.start() // Inicia el contador
@@ -325,7 +322,7 @@ class HomeFragment : Fragment() {
             pokemonRepository = pokemonRepository,
             btnCloseText = "Cerrar",
             onDialogClose = {
-                // Puedes agregar cualquier acción que necesites al cerrar el diálogo
+                resumeSoundtrack()
             }
         )
     }
