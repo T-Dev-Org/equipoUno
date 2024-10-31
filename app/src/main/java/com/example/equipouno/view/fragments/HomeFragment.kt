@@ -233,6 +233,21 @@ class HomeFragment : Fragment() {
         agregar?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_challengesFragment)
         }
+
+        compartir?.setOnClickListener {
+            val text1 = "App pico botella"
+            val text2 = "¡Solo los valientes lo juegan!"
+            val url = "https://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_419&gl=es"
+
+            val shareText = "$text1\n$text2\n$url"
+
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, shareText)
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(shareIntent, "Compartir con"))
+        }
     }
 
     private fun rateApp(){
