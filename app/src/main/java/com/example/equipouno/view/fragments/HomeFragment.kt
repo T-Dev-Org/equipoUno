@@ -74,12 +74,16 @@ class HomeFragment : Fragment() {
         super.onPause()
         pauseSoundtrack()
         pauseBottleSound()
+        spinning = false
+        actDir = 0
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         releaseSoundtrack()
         releaseBottleSound()
+        spinning = false
+        actDir = 0
     }
 
     private fun pauseSoundtrack() {
