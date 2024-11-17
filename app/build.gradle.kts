@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id ("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -97,5 +98,8 @@ dependencies {
 
     // Lotties
     implementation ("com.airbnb.android:lottie:6.0.0")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
 
 }
