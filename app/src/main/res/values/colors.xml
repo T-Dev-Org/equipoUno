@@ -7,7 +7,7 @@
     <color name="gray_700">#455A64</color>
     <color name="orange_700">#E64A19</color>
     <color name="challengeFragmentBg">#FF414141</color>
-    <color name="challengeFragmentTitle">#FFdd3f0c</color>
+    <color name="challengeFragmentTitle">#FF3D00</color>
     <color name="gray">#646464</color>
     <color name="shadow">#080808</color>
 </resources>
