@@ -21,4 +21,6 @@
     <string name="Challenge">Reto</string>
     <string name="title">Pico botella</string>
     <string name="title_lowercase">pico botella</string>
+    <string name="email">Correo electronico</string>
+    <string name="password">Contraseña</string>
 </resources>

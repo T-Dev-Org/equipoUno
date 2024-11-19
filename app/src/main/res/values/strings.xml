@@ -26,4 +26,6 @@
 
     <string name="title">Pico botella</string>
     <string name="title_lowercase">pico botella</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>
