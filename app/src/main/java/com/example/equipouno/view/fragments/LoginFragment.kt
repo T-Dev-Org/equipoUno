@@ -41,6 +41,7 @@ class LoginFragment : Fragment() {
 
         setupPasswordValidation()
         setupPasswordVisibility()
+        verifyInputs()
     }
 
 
@@ -117,6 +118,24 @@ class LoginFragment : Fragment() {
             binding.etPassword.setSelection(binding.etPassword.text?.length ?: 0)
         }
 
+    }
+
+    private fun verifyInputs() {
+        // TextWatcher que verifica los dos estados de los input
+        binding.etPassword.addTextChangedListener {
+            updateButtonsState(it.toString().isEmpty(), binding.etEmail.text.isNullOrEmpty())
+        }
+
+        // TextWatcher que verifica los dos estados de los input
+        binding.etEmail.addTextChangedListener {
+            updateButtonsState(binding.etPassword.text.isNullOrEmpty(), it.toString().isEmpty())
+        }
+    }
+
+    private fun updateButtonsState(isPasswordEmpty: Boolean, isEmailEmpty: Boolean) {
+        // Si alguno de los campos está vacío, deshabilitar el botón
+        binding.btnLogin.isEnabled = !(isPasswordEmpty || isEmailEmpty)
+        binding.tvRegister.isEnabled = !(isPasswordEmpty || isEmailEmpty)
     }
 
 }

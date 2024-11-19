@@ -10,4 +10,6 @@
     <color name="challengeFragmentTitle">#FF3D00</color>
     <color name="gray">#646464</color>
     <color name="shadow">#080808</color>
+    <color name="orange_gray">#D3A27D</color>
+    <color name="gray_button">#9EA1A1</color>
 </resources>
