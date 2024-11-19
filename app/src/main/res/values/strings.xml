@@ -25,4 +25,5 @@
     <string name="Challenge">Challenge</string>
 
     <string name="title">Pico botella</string>
+    <string name="title_lowercase">pico botella</string>
 </resources>
