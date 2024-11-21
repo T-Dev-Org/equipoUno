@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        challengeRepository = ChallengeRepository(requireContext())
+        challengeRepository = ChallengeRepository()
         pokemonRepository = PokemonRepository()
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
         toolbarOptions()
