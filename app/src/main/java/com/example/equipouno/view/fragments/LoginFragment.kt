@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.text.InputType
+import androidx.core.content.ContextCompat
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
-
     private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
@@ -36,7 +38,12 @@ class LoginFragment : Fragment() {
         binding.btnLogin.setOnClickListener{
             loginUser()
         }
+
+        setupPasswordValidation()
+        setupPasswordVisibility()
+        verifyInputs()
     }
+
 
     private fun registerUser(){
         // TODO
@@ -48,6 +55,87 @@ class LoginFragment : Fragment() {
         // TODO
         findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         Toast.makeText(context, "TODO: usuario logeado", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupPasswordValidation() {
+        binding.etPassword.setOnFocusChangeListener { _, hasFoces ->
+            updatePasswordFieldState(hasFoces)
+        }
+
+        binding.etPassword.addTextChangedListener {
+            val passwordInput = it.toString()
+            if (passwordInput.length in 6..10) {
+                clearErrorState()
+            } else {
+                showErrorState()
+            }
+        }
+    }
+
+    private fun updatePasswordFieldState(hasFocus: Boolean) {
+        if (hasFocus) {
+            binding.tilPassword.boxStrokeColor = resources.getColor(android.R.color.white, null)
+        } else if (binding.etPassword.text.toString().length < 6) {
+            showErrorState()
+        } else {
+            binding.tilPassword.boxStrokeColor = resources.getColor(android.R.color.darker_gray, null)
+        }
+    }
+
+    private fun showErrorState() {
+        binding.tilPassword.apply {
+            error = "Mínimo 6 digitos"
+            boxStrokeColor = resources.getColor(android.R.color.holo_red_light, null)
+        }
+    }
+
+    private fun clearErrorState() {
+        binding.tilPassword.apply {
+            error = null
+            boxStrokeColor = resources.getColor(android.R.color.white, null)
+        }
+    }
+
+    private fun setupPasswordVisibility() {
+        var isPasswordVisible = false
+
+        binding.tilPassword.setEndIconOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            if (isPasswordVisible) {
+                // Mostrar contraseña
+                binding.etPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                binding.tilPassword.endIconDrawable =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye_closed)
+            } else {
+                // Ocultar contraseña
+                binding.etPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                binding.tilPassword.endIconDrawable =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_eye_open)
+            }
+            // Mantener el cursor al final del texto
+            binding.etPassword.setSelection(binding.etPassword.text?.length ?: 0)
+        }
+
+    }
+
+    private fun verifyInputs() {
+        // TextWatcher que verifica los dos estados de los input
+        binding.etPassword.addTextChangedListener {
+            updateButtonsState(it.toString().isEmpty(), binding.etEmail.text.isNullOrEmpty())
+        }
+
+        // TextWatcher que verifica los dos estados de los input
+        binding.etEmail.addTextChangedListener {
+            updateButtonsState(binding.etPassword.text.isNullOrEmpty(), it.toString().isEmpty())
+        }
+    }
+
+    private fun updateButtonsState(isPasswordEmpty: Boolean, isEmailEmpty: Boolean) {
+        // Si alguno de los campos está vacío, deshabilitar el botón
+        binding.btnLogin.isEnabled = !(isPasswordEmpty || isEmailEmpty)
+        binding.tvRegister.isEnabled = !(isPasswordEmpty || isEmailEmpty)
     }
 
 }
