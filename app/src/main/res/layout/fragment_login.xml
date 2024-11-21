@@ -6,7 +6,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
         android:background="@color/black"
         tools:context=".views.fragment.LoginFragment">
 
@@ -20,6 +19,7 @@
             android:padding="20dp"
             android:fontFamily="@font/stylish_regular"
             android:layout_marginBottom="50dp"
+            android:layout_marginTop="40dp"
             android:textColor="@color/challengeFragmentTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +35,8 @@
             app:boxBackgroundMode="outline"
             app:boxStrokeWidthFocused="2dp"
             app:boxStrokeColor="@color/login_input_selector"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tilPassword">
@@ -60,6 +62,8 @@
             app:hintTextColor="@color/white"
             app:boxBackgroundMode="outline"
             app:boxStrokeColor="@color/login_input_selector"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:endIconMode="custom"
             app:endIconDrawable="@drawable/ic_eye_open"
             android:layout_marginTop="30dp"
@@ -109,17 +113,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-
-        <ImageView
+        <View
             android:id="@+id/wave"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:src="@drawable/wave_shape"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/wave_shape"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </layout>
