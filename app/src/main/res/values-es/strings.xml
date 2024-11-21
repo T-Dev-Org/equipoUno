@@ -23,4 +23,6 @@
     <string name="title_lowercase">pico botella</string>
     <string name="email">Correo electronico</string>
     <string name="password">Contraseña</string>
+    <string name="login">Login</string>
+    <string name="registrarse">Registrarse</string>
 </resources>
