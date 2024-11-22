@@ -82,13 +82,6 @@ dependencies {
     // LiveData
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
-    // Room
-    implementation ("androidx.room:room-runtime:2.5.2")
-    implementation ("androidx.room:room-ktx:2.5.2")
-    ksp("androidx.room:room-compiler:2.5.2")
-    implementation ("com.getbase:floatingactionbutton:1.10.1")
-
-
     //Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -101,5 +94,10 @@ dependencies {
 
     //Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
+
+    // Firestore
+    // Add firestore implementation
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-bom:32.5.0")
 
 }
