@@ -7,12 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.equipouno.model.Challenge
 import com.example.equipouno.repository.ChallengeRepository
+import com.example.equipouno.utils.Constants.challengeTable.COLUMN_DESCRIPTION
+import com.example.equipouno.utils.Constants.challengeTable.COLUMN_MODIFICATION_DATE
 import kotlinx.coroutines.launch
 
 class ChallengeViewModel(application: Application) : AndroidViewModel(application) {
 
     val context = getApplication<Application>()
-    private val challengeRepository = ChallengeRepository(context)
+    private val challengeRepository = ChallengeRepository()
 
     private val _listChallenge = MutableLiveData<List<Challenge>>()
     val listChallenge: LiveData<List<Challenge>> get() = _listChallenge
@@ -24,10 +26,11 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             _progressState.value = true
             try {
-                challengeRepository.insertChallenge(challenge)
-                getListChallenge()
-                _progressState.value = false
+                val success = challengeRepository.insertChallenge(challenge)
+                if (success) getListChallenge()
             } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
                 _progressState.value = false
             }
         }
@@ -37,10 +40,15 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             _progressState.value = true
             try {
-                challengeRepository.updateChallenge(challenge)
-                getListChallenge()
-                _progressState.value = false
+                val updatedFields = mapOf(
+                    COLUMN_DESCRIPTION to challenge.description,
+                    COLUMN_MODIFICATION_DATE to challenge.modificationDate
+                )
+                val success = challengeRepository.updateChallenge(challenge.id, updatedFields)
+                if (success) getListChallenge()
             } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
                 _progressState.value = false
             }
         }
@@ -50,9 +58,12 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             _progressState.value = true
             try {
-                _listChallenge.value = challengeRepository.getListChallenge()
-                _progressState.value = false
+                challengeRepository.getListChallenge { challenges ->
+                    _listChallenge.postValue(challenges)
+                }
             } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
                 _progressState.value = false
             }
         }
@@ -62,10 +73,11 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             _progressState.value = true
             try {
-                challengeRepository.deleteChallenge(challenge)
-                getListChallenge()
-                _progressState.value = false
+                val success = challengeRepository.deleteChallenge(challenge.id)
+                if (success) getListChallenge()
             } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
                 _progressState.value = false
             }
         }
