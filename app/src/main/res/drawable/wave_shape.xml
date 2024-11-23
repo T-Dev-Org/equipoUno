@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="150dp"
+    android:viewportWidth="400"
+    android:viewportHeight="100">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="
+            M0,50
+            Q25,10 50,50
+            Q75,90 100,50
+            Q125,30 150,50
+            Q175,70 200,50
+            Q225,10 250,50
+            Q275,90 300,50
+            Q325,20 350,50
+            Q375,80 400,50
+            Q425,30 450,50
+            Q475,70 500,50
+            L500,100
+            L0,100 Z" />
+</vector>

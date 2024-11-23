@@ -20,4 +20,9 @@
     <string name="close_button">Cerrar</string>
     <string name="Challenge">Reto</string>
     <string name="title">Pico botella</string>
+    <string name="title_lowercase">pico botella</string>
+    <string name="email">Correo electronico</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Login</string>
+    <string name="registrarse">Registrarse</string>
 </resources>

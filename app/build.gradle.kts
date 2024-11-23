@@ -2,7 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
-    id ("kotlin-kapt")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -97,5 +99,15 @@ dependencies {
 
     // Lotties
     implementation ("com.airbnb.android:lottie:6.0.0")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
+
+    //Firebase auth
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    //dagger hilt
+    implementation("com.google.dagger:hilt-android:2.47")
+    kapt("com.google.dagger:hilt-android-compiler:2.47")
 
 }
