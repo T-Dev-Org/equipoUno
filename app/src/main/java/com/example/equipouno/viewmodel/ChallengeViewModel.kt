@@ -1,20 +1,18 @@
 package com.example.equipouno.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.equipouno.model.Challenge
 import com.example.equipouno.repository.ChallengeRepository
 import com.example.equipouno.utils.Constants.challengeTable.COLUMN_DESCRIPTION
 import com.example.equipouno.utils.Constants.challengeTable.COLUMN_MODIFICATION_DATE
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ChallengeViewModel(application: Application) : AndroidViewModel(application) {
-
-    val context = getApplication<Application>()
-    private val challengeRepository = ChallengeRepository()
+@HiltViewModel
+class ChallengeViewModel @Inject constructor(
+    private val challengeRepository: ChallengeRepository
+) : ViewModel() {
 
     private val _listChallenge = MutableLiveData<List<Challenge>>()
     val listChallenge: LiveData<List<Challenge>> get() = _listChallenge
