@@ -2,24 +2,24 @@ package com.example.equipouno.repository
 
 import com.example.equipouno.model.Challenge
 import com.example.equipouno.utils.Constants.challengeTable.COLUMN_CREATION_DATE
-import com.example.equipouno.utils.Constants.challengeTable.TABLE_NAME
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class ChallengeRepository {
-
-    private val db = FirebaseFirestore.getInstance().collection(TABLE_NAME)
+class ChallengeRepository @Inject constructor(
+    private val collection: CollectionReference
+) {
 
     suspend fun insertChallenge(challenge: Challenge): Boolean {
         return try {
             val challengeWithTimestamps = challenge.copy(
-                id = challenge.id.ifEmpty { db.document().id },
+                id = challenge.id.ifEmpty { collection.document().id },
                 creationDate = Timestamp.now(),
                 modificationDate = Timestamp.now()
             )
 
-            db.document(challengeWithTimestamps.id).set(challengeWithTimestamps).await()
+            collection.document(challengeWithTimestamps.id).set(challengeWithTimestamps).await()
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -28,7 +28,7 @@ class ChallengeRepository {
     }
 
     fun getListChallenge(callback: (List<Challenge>) -> Unit) {
-        db.orderBy(COLUMN_CREATION_DATE, com.google.firebase.firestore.Query.Direction.DESCENDING)
+        collection.orderBy(COLUMN_CREATION_DATE, com.google.firebase.firestore.Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { snapshot ->
                 val challenges = snapshot.documents.mapNotNull { doc ->
@@ -43,7 +43,7 @@ class ChallengeRepository {
 
     suspend fun getRandomChallenge(): Challenge? {
         return try {
-            val snapshot = db.get().await()
+            val snapshot = collection.get().await()
             val challenges = snapshot.documents.mapNotNull { doc ->
                 doc.toObject(Challenge::class.java)?.copy(id = doc.id)
             }
@@ -60,7 +60,7 @@ class ChallengeRepository {
 
     suspend fun updateChallenge(id: String, updatedFields: Map<String, Any>): Boolean {
         return try {
-            db.document(id).update(updatedFields).await()
+            collection.document(id).update(updatedFields).await()
             true
         } catch (e: Exception) {
             false
@@ -69,7 +69,7 @@ class ChallengeRepository {
 
     suspend fun deleteChallenge(id: String): Boolean {
         return try {
-            db.document(id).delete().await()
+            collection.document(id).delete().await()
             true
         } catch (e: Exception) {
             false
