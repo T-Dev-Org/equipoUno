@@ -17,7 +17,9 @@ import com.example.equipouno.model.Challenge
 import com.example.equipouno.view.adapter.ChallengeAdapter
 import com.example.equipouno.view.dialogue.CustomDialog
 import com.example.equipouno.viewmodel.ChallengeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChallengesFragment : Fragment() {
 
     private lateinit var binding: FragmentChallengesBinding

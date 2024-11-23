@@ -18,8 +18,11 @@ import com.example.equipouno.databinding.FragmentHomeBinding
 import com.example.equipouno.repository.ChallengeRepository
 import com.example.equipouno.repository.PokemonRepository
 import com.example.equipouno.view.dialogue.ChallengeDialog
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.random.Random
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
@@ -34,6 +37,8 @@ class HomeFragment : Fragment() {
     private var currentPosition = 0
     private var actDir = 0
 
+    @Inject
+    lateinit var challengeRepositoryInjected: ChallengeRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +56,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        challengeRepository = ChallengeRepository()
+        challengeRepository = challengeRepositoryInjected
         pokemonRepository = PokemonRepository()
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
         toolbarOptions()
