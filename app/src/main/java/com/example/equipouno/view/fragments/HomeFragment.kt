@@ -28,7 +28,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var bottleMediaPlayer: MediaPlayer
-    private lateinit var challengeRepository: ChallengeRepository // Instancia del repositorio de retos
     @Inject
     lateinit var pokemonRepository: PokemonRepository
     private var timer: CountDownTimer? = null
@@ -39,7 +38,7 @@ class HomeFragment : Fragment() {
     private var actDir = 0
 
     @Inject
-    lateinit var challengeRepositoryInjected: ChallengeRepository
+    lateinit var challengeRepository: ChallengeRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +56,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        challengeRepository = challengeRepositoryInjected
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
         toolbarOptions()
 
