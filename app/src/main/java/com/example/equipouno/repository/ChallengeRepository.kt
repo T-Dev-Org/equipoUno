@@ -2,17 +2,14 @@ package com.example.equipouno.repository
 
 import com.example.equipouno.model.Challenge
 import com.example.equipouno.utils.Constants.challengeTable.COLUMN_CREATION_DATE
-import com.example.equipouno.utils.Constants.challengeTable.TABLE_NAME
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class ChallengeRepository @Inject constructor(
-    private val db: FirebaseFirestore
+    private val collection: CollectionReference
 ) {
-
-    private val collection = db.collection(TABLE_NAME)
 
     suspend fun insertChallenge(challenge: Challenge): Boolean {
         return try {

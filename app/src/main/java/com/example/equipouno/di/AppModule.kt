@@ -3,7 +3,9 @@ package com.example.equipouno.di
 import com.example.equipouno.repository.ChallengeRepository
 import com.example.equipouno.repository.PokemonRepository
 import com.example.equipouno.utils.Constants.BASE_URL
+import com.example.equipouno.utils.Constants.challengeTable.TABLE_NAME
 import com.example.equipouno.webservice.ApiService
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
@@ -25,11 +27,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideChallengeRepository(firestore: FirebaseFirestore): ChallengeRepository {
-        return ChallengeRepository(firestore)
+    fun provideChallengeCollection(db: FirebaseFirestore): CollectionReference {
+        return db.collection(TABLE_NAME)
     }
 
-    // Proporcionar ApiService
+    @Provides
+    @Singleton
+    fun provideChallengeRepository(collection: CollectionReference): ChallengeRepository {
+        return ChallengeRepository(collection)
+    }
+
     @Provides
     @Singleton
     fun provideApiService(): ApiService {
@@ -40,7 +47,6 @@ object AppModule {
             .create(ApiService::class.java)
     }
 
-    // Inyectar ApiService en PokemonRepository
     @Provides
     @Singleton
     fun providePokemonRepository(apiService: ApiService): PokemonRepository {
