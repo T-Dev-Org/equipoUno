@@ -60,8 +60,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="Compartir"
+                android:layout_marginEnd="20dp"
                 android:src="@drawable/ic_share"
                 android:foreground="@drawable/touch_effect" />
+
+            <ImageView
+                android:id="@+id/salir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Salir"
+                android:src="@drawable/ic_log_out"
+                android:foreground="@drawable/touch_effect"/>
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
