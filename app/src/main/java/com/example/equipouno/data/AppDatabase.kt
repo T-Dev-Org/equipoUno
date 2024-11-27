@@ -15,13 +15,13 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun challengeDao(): ChallengeDao
 
-    companion object {
-        fun getDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(
-                context.applicationContext,
-                AppDatabase::class.java,
-                NAME_BD
-            ).build()
-        }
-    }
+//    companion object {
+//        fun getDatabase(context: Context): AppDatabase {
+//            return Room.databaseBuilder(
+//                context.applicationContext,
+//                AppDatabase::class.java,
+//                NAME_BD
+//            ).build()
+//        }
+//    }
 }

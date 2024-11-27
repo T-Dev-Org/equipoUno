@@ -7,10 +7,13 @@ import com.example.equipouno.model.Challenge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.Date
+import javax.inject.Inject
 import kotlin.random.Random
 
-class ChallengeRepository(context: Context) {
-    private val challengeDao: ChallengeDao = AppDatabase.getDatabase(context).challengeDao()
+
+class ChallengeRepository @Inject constructor(
+    private val challengeDao: ChallengeDao
+) {
 
     suspend fun insertChallenge(challenge: Challenge) {
         withContext(Dispatchers.IO) {

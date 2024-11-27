@@ -18,8 +18,11 @@ import com.example.equipouno.databinding.FragmentHomeBinding
 import com.example.equipouno.repository.ChallengeRepository
 import com.example.equipouno.repository.PokemonRepository
 import com.example.equipouno.view.dialogue.ChallengeDialog
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
 
+
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
@@ -51,7 +54,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        challengeRepository = ChallengeRepository(requireContext())
+//        challengeRepository = ChallengeRepository(requireContext())
         pokemonRepository = PokemonRepository()
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
         toolbarOptions()
@@ -122,21 +125,21 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun releaseSoundtrack(){
+    private fun releaseSoundtrack() {
         // Liberar recursos del MediaPlayer al destruir el fragmento
         if (this::mediaPlayer.isInitialized) {
             mediaPlayer.release()
         }
     }
 
-    private fun releaseBottleSound(){
+    private fun releaseBottleSound() {
         // Liberar recursos del MediaPlayer al destruir el fragmento
         if (this::bottleMediaPlayer.isInitialized) {
             bottleMediaPlayer.release()
         }
     }
 
-    private fun playSoundtrack(){
+    private fun playSoundtrack() {
         // Se le pasa la pista de audio
         //mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
 
@@ -149,7 +152,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun playBottleSound(){
+    private fun playBottleSound() {
         // Se le pasa la pista de audio
         bottleMediaPlayer = MediaPlayer.create(requireContext(), R.raw.bottle_spinning)
 
@@ -162,8 +165,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun pressButton()
-    {
+    private fun pressButton() {
         binding.orangeButton.setOnClickListener()
         {
             try {
@@ -180,8 +182,7 @@ class HomeFragment : Fragment() {
                     countdownTime()
                 }
 
-            } catch (e: Exception)
-            {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 println("Para")
             }
@@ -214,23 +215,23 @@ class HomeFragment : Fragment() {
         }.start() // Inicia el contador
     }
 
-    private  fun toolbarOptions(){
+    private fun toolbarOptions() {
         val calificacion = view?.findViewById<ImageView>(R.id.calificacion)
         val volumen = view?.findViewById<ImageView>(R.id.volumen)
         val informacion = view?.findViewById<ImageView>(R.id.instrucciones)
         val agregar = view?.findViewById<ImageView>(R.id.agregar)
         val compartir = view?.findViewById<ImageView>(R.id.compartir)
 
-        calificacion?.setOnClickListener{
+        calificacion?.setOnClickListener {
             rateApp()
         }
 
-        volumen?.setOnClickListener{
+        volumen?.setOnClickListener {
             setMusic()
         }
 
         informacion?.setOnClickListener {
-            if(!isMuted){
+            if (!isMuted) {
                 pauseSoundtrack()
             }
             findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
@@ -243,7 +244,8 @@ class HomeFragment : Fragment() {
         compartir?.setOnClickListener {
             val text1 = "App pico botella"
             val text2 = "¡Solo los valientes lo juegan!"
-            val url = "https://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_419&gl=es"
+            val url =
+                "https://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_419&gl=es"
 
             val shareText = "$text1\n$text2\n$url"
 
@@ -256,16 +258,19 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun rateApp(){
-        val calificar = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_419&gl=es"))
+    private fun rateApp() {
+        val calificar = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_419&gl=es")
+        )
         startActivity(calificar)
     }
 
-    private fun setMusic(){
+    private fun setMusic() {
         isMuted = !isMuted
-        if(isMuted){
+        if (isMuted) {
             pauseSoundtrack()
-        }else{
+        } else {
             resumeSoundtrack()
         }
         updateVolumeIcon()
@@ -280,11 +285,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun bottleSpin(onAnimationEnd: () -> Unit)
-    {
-        if(!spinning)
-        {
-            val newDir = actDir + Random.nextInt(2520 ,3600)
+    private fun bottleSpin(onAnimationEnd: () -> Unit) {
+        if (!spinning) {
+            val newDir = actDir + Random.nextInt(2520, 3600)
 
             val pivotX = binding.bottle.width / 2f
             val pivotY = binding.bottle.height / 2f

@@ -10,7 +10,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentInstructionsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InstructionsFragment : Fragment() {
 
     private lateinit var binding: FragmentInstructionsBinding
