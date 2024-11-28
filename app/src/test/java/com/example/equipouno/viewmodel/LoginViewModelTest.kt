@@ -3,15 +3,14 @@ package com.example.equipouno.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.equipouno.repository.LoginRepository
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito
+
 import org.mockito.MockitoAnnotations
 
 class LoginViewModelTest {
@@ -26,6 +25,9 @@ class LoginViewModelTest {
     lateinit var mockObserver: Observer<Boolean>
 
     private lateinit var loginViewModel: LoginViewModel
+
+    @Mock
+    lateinit var firebaseAuth: FirebaseAuth
     
 
     @Before
@@ -88,6 +90,22 @@ class LoginViewModelTest {
 
         //Then
         assertTrue(isViewEnabled)
+    }
+
+    @Test
+    fun `test loginUser failure`() = runBlocking {
+        //Given
+        var email = ""
+        var passowrd = ""
+        var isLoginResult: Boolean? = null
+
+        //When
+        loginViewModel.loginUser(email , passowrd) { isSuccess ->
+            isLoginResult = isSuccess
+        }
+
+        // Then
+        assert(isLoginResult == false)
     }
 
 }
