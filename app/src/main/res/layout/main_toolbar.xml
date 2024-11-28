@@ -23,7 +23,7 @@
                 android:id="@+id/calificacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="10dp"
                 android:contentDescription="Calificar app"
                 android:src="@drawable/ic_star"
                 android:foreground="@drawable/touch_effect" />
@@ -32,7 +32,7 @@
                 android:id="@+id/volumen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="10dp"
                 android:contentDescription="Música"
                 android:src="@drawable/ic_volume_up"
                 android:foreground="@drawable/touch_effect"/>
@@ -41,7 +41,7 @@
                 android:id="@+id/instrucciones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="10dp"
                 android:contentDescription="Explicación del juego"
                 android:src="@drawable/ic_explication"
                 android:foreground="@drawable/touch_effect" />
@@ -50,7 +50,7 @@
                 android:id="@+id/agregar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="10dp"
                 android:contentDescription="Agregar reto"
                 android:src="@drawable/ic_add_reto"
                 android:foreground="@drawable/touch_effect" />
@@ -61,6 +61,15 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="Compartir"
                 android:src="@drawable/ic_share"
+                android:layout_marginEnd="10dp"
+                android:foreground="@drawable/touch_effect" />
+
+            <ImageView
+                android:id="@+id/salir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Salir"
+                android:src="@drawable/ic_logout"
                 android:foreground="@drawable/touch_effect" />
 
         </LinearLayout>

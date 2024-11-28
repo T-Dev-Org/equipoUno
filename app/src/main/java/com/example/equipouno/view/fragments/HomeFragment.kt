@@ -1,6 +1,8 @@
 package com.example.equipouno.view.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -17,7 +19,10 @@ import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentHomeBinding
 import com.example.equipouno.repository.ChallengeRepository
 import com.example.equipouno.repository.PokemonRepository
+import com.example.equipouno.view.LoginActivity
+import com.example.equipouno.view.MainActivity
 import com.example.equipouno.view.dialogue.ChallengeDialog
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.random.Random
@@ -28,6 +33,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var bottleMediaPlayer: MediaPlayer
+    private lateinit var sharedPreferences: SharedPreferences
     @Inject
     lateinit var pokemonRepository: PokemonRepository
     private var timer: CountDownTimer? = null
@@ -56,6 +62,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPreferences = requireActivity().getSharedPreferences("shared", Context.MODE_PRIVATE)
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
         toolbarOptions()
 
@@ -221,6 +228,11 @@ class HomeFragment : Fragment() {
         val informacion = view?.findViewById<ImageView>(R.id.instrucciones)
         val agregar = view?.findViewById<ImageView>(R.id.agregar)
         val compartir = view?.findViewById<ImageView>(R.id.compartir)
+        val salir = view?.findViewById<ImageView>(R.id.salir)
+
+        salir?.setOnClickListener {
+            logOut()
+        }
 
         calificacion?.setOnClickListener {
             rateApp()
@@ -282,6 +294,15 @@ class HomeFragment : Fragment() {
             volumen?.setImageResource(R.drawable.ic_volume_off)
         } else {
             volumen?.setImageResource(R.drawable.ic_volume_up)
+        }
+    }
+
+    private fun logOut(){
+        sharedPreferences.edit().clear().apply()
+        FirebaseAuth.getInstance().signOut()
+        (requireActivity() as MainActivity).apply {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
