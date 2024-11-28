@@ -1,6 +1,8 @@
 package com.example.equipouno.view.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -31,6 +33,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var bottleMediaPlayer: MediaPlayer
+    private lateinit var sharedPreferences: SharedPreferences
     @Inject
     lateinit var pokemonRepository: PokemonRepository
     private var timer: CountDownTimer? = null
@@ -59,6 +62,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPreferences = requireActivity().getSharedPreferences("shared", Context.MODE_PRIVATE)
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.bg_soundtrack)
         toolbarOptions()
 
@@ -227,11 +231,7 @@ class HomeFragment : Fragment() {
         val salir = view?.findViewById<ImageView>(R.id.salir)
 
         salir?.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            (requireActivity() as MainActivity).apply {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            }
+            logOut()
         }
 
         calificacion?.setOnClickListener {
@@ -294,6 +294,15 @@ class HomeFragment : Fragment() {
             volumen?.setImageResource(R.drawable.ic_volume_off)
         } else {
             volumen?.setImageResource(R.drawable.ic_volume_up)
+        }
+    }
+
+    private fun logOut(){
+        sharedPreferences.edit().clear().apply()
+        FirebaseAuth.getInstance().signOut()
+        (requireActivity() as MainActivity).apply {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
