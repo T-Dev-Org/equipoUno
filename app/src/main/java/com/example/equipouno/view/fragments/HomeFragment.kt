@@ -17,6 +17,7 @@ import com.example.equipouno.R
 import com.example.equipouno.databinding.FragmentHomeBinding
 import com.example.equipouno.repository.ChallengeRepository
 import com.example.equipouno.repository.PokemonRepository
+import com.example.equipouno.view.LoginActivity
 import com.example.equipouno.view.dialogue.ChallengeDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -221,6 +222,13 @@ class HomeFragment : Fragment() {
         val informacion = view?.findViewById<ImageView>(R.id.instrucciones)
         val agregar = view?.findViewById<ImageView>(R.id.agregar)
         val compartir = view?.findViewById<ImageView>(R.id.compartir)
+        val salir = view?.findViewById<ImageView>(R.id.salir)
+
+        salir?.setOnClickListener {
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
 
         calificacion?.setOnClickListener {
             rateApp()
