@@ -18,7 +18,9 @@ import com.example.equipouno.databinding.FragmentHomeBinding
 import com.example.equipouno.repository.ChallengeRepository
 import com.example.equipouno.repository.PokemonRepository
 import com.example.equipouno.view.LoginActivity
+import com.example.equipouno.view.MainActivity
 import com.example.equipouno.view.dialogue.ChallengeDialog
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.random.Random
@@ -225,9 +227,11 @@ class HomeFragment : Fragment() {
         val salir = view?.findViewById<ImageView>(R.id.salir)
 
         salir?.setOnClickListener {
-            val intent = Intent(requireActivity(), LoginActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+            FirebaseAuth.getInstance().signOut()
+            (requireActivity() as MainActivity).apply {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
         }
 
         calificacion?.setOnClickListener {
